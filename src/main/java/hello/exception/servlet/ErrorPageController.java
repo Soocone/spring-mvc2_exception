@@ -39,7 +39,7 @@ public class ErrorPageController {
         return "error-page/500";
     }
 
-    @RequestMapping(value = "/error-page/500", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/error-page/500", produces = MediaType.APPLICATION_JSON_VALUE) // produces쓰면 client의 accept 타입을 바라봄
     public ResponseEntity<Map<String, Object>> errorPage500Api(
             HttpServletRequest request, HttpServletResponse response) {
 
@@ -51,7 +51,7 @@ public class ErrorPageController {
         result.put("message", ex.getMessage());
 
         Integer statusCode = (Integer) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-        return new ResponseEntity<>(result, HttpStatus.valueOf(statusCode));
+        return new ResponseEntity<>(result, HttpStatus.valueOf(statusCode)); // HttpStatus.valueOf(statusCode)엔 상태코드가 들어있음
     }
 
     private void printErrorInfo(HttpServletRequest request) {
