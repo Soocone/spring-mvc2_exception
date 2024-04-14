@@ -27,6 +27,7 @@ public class UserHandlerExceptionResolver implements HandlerExceptionResolver {
                 String acceptHeader = request.getHeader("accept");
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 
+                // accept가 json이면
                 if ("application/json".equals(acceptHeader)) {
                     Map<String, Object> errorResult = new HashMap<>();
                     errorResult.put("ex", ex.getClass());
@@ -38,8 +39,8 @@ public class UserHandlerExceptionResolver implements HandlerExceptionResolver {
                     response.getWriter().write(result);
                     return new ModelAndView();
                 } else {
-                    // TEXT/HTML
-                    return new ModelAndView("error/500");
+                    // TEXT/HTML로 넘어올 때
+                    return new ModelAndView("error/500"); // template 호출
                 }
             }
 
